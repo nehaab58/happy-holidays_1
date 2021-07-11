@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Create snowfall effect using jquery - thesoftwareguy</title>
+<link href="style2.css" rel="stylesheet" >
+<link rel="icon" href="http://www.thesoftwareguy.in/favicon.ico" type="image/x-icon" />
+<style>
+body{margin:0;padding:0;background:#000;color:#fff; font: 12px/18px Arial, Helvetica, sans-serif; }
+.container{min-height:1200px; width:100%;}
+.block{width:100%;}
+.block h1{ font:40px Arial, Helvetica, sans-serif; text-shadow: 1px 1px 1px #000, 3px 3px 5px blue; text-align:center;  }
+.block p{padding:10px; text-align:center;}
+.link{ font:20px Arial, Helvetica, sans-serif; text-shadow: 1px 1px 1px #000, 3px 3px 5px red; color:#FFF; text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="block">
+    	<h1>Merry Christmas</h1>
+        <p><a href="index2.html" class="link">View All Effects here</a></p>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Colonel mustard old man in pub rock n roll star Milkshake issues kaiser bill et sodales cum Nostrilis tickler helllloooo, kaiser bill et sodales cum rock n roll star elit Nostrilis tickler old man in pub waiter Milkshake issues colonel mustard el snort helllloooo I drink your milkshake rugged et, don’t panic rock n roll star el snort consectetur hungarian cunning like a fox off-piste borat village people prince barin helllloooo I drink your milkshake elit old man in pub kaiser bill waiter rugged et colonel mustard Nostrilis tickler et sodales cum Milkshake issues?</p>
+        <p>Cardinal richelieu challenge you to a duel off-piste groucho marx clone zone shopper hulk hogan? Saddam hussein consectetur driving gloves dickie davies villain, consectetur villain charity donate driving gloves dickie davies saddam hussein toothbrush lorreto del mar grooming, d’artagnan dickie davies grooming circus strongman bruce forsyth socially mobile charity donate bogie basket lorreto del mar consectetur driving gloves toothbrush villain saddam hussein movember soup strainer stiff upper lip.</p>
+        <p></p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Colonel mustard old man in pub rock n roll star Milkshake issues kaiser bill et sodales cum Nostrilis tickler helllloooo, kaiser bill et sodales cum rock n roll star elit Nostrilis tickler old man in pub waiter Milkshake issues colonel mustard el snort helllloooo I drink your milkshake rugged et, don’t panic rock n roll star el snort consectetur hungarian cunning like a fox off-piste borat village people prince barin helllloooo I drink your milkshake elit old man in pub kaiser bill waiter rugged et colonel mustard Nostrilis tickler et sodales cum Milkshake issues?</p>
+        <p>Cardinal richelieu challenge you to a duel off-piste groucho marx clone zone shopper hulk hogan? Saddam hussein consectetur driving gloves dickie davies villain, consectetur villain charity donate driving gloves dickie davies saddam hussein toothbrush lorreto del mar grooming, d’artagnan dickie davies grooming circus strongman bruce forsyth socially mobile charity donate bogie basket lorreto del mar consectetur driving gloves toothbrush villain saddam hussein movember soup strainer stiff upper lip.</p>
+        <p></p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Colonel mustard old man in pub rock n roll star Milkshake issues kaiser bill et sodales cum Nostrilis tickler helllloooo, kaiser bill et sodales cum rock n roll star elit Nostrilis tickler old man in pub waiter Milkshake issues colonel mustard el snort helllloooo I drink your milkshake rugged et, don’t panic rock n roll star el snort consectetur hungarian cunning like a fox off-piste borat village people prince barin helllloooo I drink your milkshake elit old man in pub kaiser bill waiter rugged et colonel mustard Nostrilis tickler et sodales cum Milkshake issues?</p>
+        <p>Cardinal richelieu challenge you to a duel off-piste groucho marx clone zone shopper hulk hogan? Saddam hussein consectetur driving gloves dickie davies villain, consectetur villain charity donate driving gloves dickie davies saddam hussein toothbrush lorreto del mar grooming, d’artagnan dickie davies grooming circus strongman bruce forsyth socially mobile charity donate bogie basket lorreto del mar consectetur driving gloves toothbrush villain saddam hussein movember soup strainer stiff upper lip.</p>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src='snowfall.jquery.js'></script>
+<script type='text/javascript'> 	
+$(document).ready(function(){
+	$(document).snowfall(
+	{
+		flakeCount : 150,        // number
+		flakeColor : '#fff', // string
+		flakeIndex: 999999,     // number
+		minSize : 1,            // number
+		maxSize : 3,            // number
+		minSpeed : 2,           // number
+		maxSpeed : 10,           // number
+		round : true,          // bool
+		shadow : false          // bool
+	}
+	);
+});
+</script>
+</html>

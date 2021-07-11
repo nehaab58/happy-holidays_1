@@ -1,0 +1,42 @@
+/*!******************************************************************************
+The MIT License (MIT)
+Copyright (c) 2014 WPO Foundation
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+Copyright (c) 2014, Google Inc.
+All rights reserved.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name of the <ORGANIZATION> nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+******************************************************************************/
+window.RUMSpeedIndex=function(n){var o;n=n||window;var u=n.document,s=function(t){var i=!1,r;return t.getBoundingClientRect&&(r=t.getBoundingClientRect(),i={top:Math.max(r.top,0),left:Math.max(r.left,0),bottom:Math.min(r.bottom,n.innerHeight||u.documentElement.clientHeight),right:Math.min(r.right,n.innerWidth||u.documentElement.clientWidth)},i.bottom<=i.top||i.right<=i.left?i=!1:i.area=(i.bottom-i.top)*(i.right-i.left)),i},h=function(n,t){if(t){var r=s(n);r&&i.push({url:t,area:r.area,rect:r})}},c=function(){e(u.getElementsByTagName("img"));e(u.getElementsByTagName("iframe"));window.navigator.userAgent.indexOf("MSIE ")===-1&&e($("header *, section.container *").filter(function(n,t){var i=t.style.backgroundImage;return i&&i.toLowerCase()!=="none"}))},e=function(t){for(var r,o,u,c,f,l=/url\(.*(http.*)\)/ig,e=0;e<t.length;e++){if(r=t[e],o=n.getComputedStyle(r),r.tagName=="IMG")h(r,r.src);else if(r.tagName=="IFRAME")try{u=s(r);u&&(c=RUMSpeedIndex(r.contentWindow),c&&i.push({tm:c,area:u.area,rect:u}))}catch(a){}o["background-image"]&&(l.lastIndex=0,f=l.exec(o["background-image"]),f&&f.length>1&&h(r,f[1].replace('"',"")))}},l=function(){for(var t,u={},f=n.performance.getEntriesByType("resource"),r=0;r<f.length;r++)u[f[r].name]=f[r].responseEnd;for(t=0;t<i.length;t++)"tm"in i[t]||(i[t].tm=u[i[t].url]!==undefined?u[i[t].url]:0)},a=function(){var r,s,h,l,c,i,e,a,f,v;if("msFirstPaint"in n.performance.timing&&(t=n.performance.timing.msFirstPaint-o),"chrome"in n&&"loadTimes"in n.chrome&&(r=n.chrome.loadTimes(),"firstPaintTime"in r&&r.firstPaintTime>0&&(s=r.startLoadTime,"requestTime"in r&&(s=r.requestTime),r.firstPaintTime>=s&&(t=(r.firstPaintTime-s)*1e3))),t===undefined||t<0||t>12e4){for(t=n.performance.timing.responseStart-o,h={},l=u.getElementsByTagName("head")[0].children,c=0;c<l.length;c++)i=l[c],i.tagName=="SCRIPT"&&i.src&&!i.async&&(h[i.src]=!0),i.tagName=="LINK"&&i.rel=="stylesheet"&&i.href&&(h[i.href]=!0);for(e=n.performance.getEntriesByType("resource"),a=!1,f=0;f<e.length;f++)!a&&h[e[f].name]&&(e[f].initiatorType=="script"||e[f].initiatorType=="link")?(v=e[f].responseEnd,(t===undefined||v>t)&&(t=v)):a=!0}t=Math.max(t,0)},v=function(){for(var h,o,l,a,c,f={"0":0},s=0,e=0;e<i.length;e++)h=t,"tm"in i[e]&&i[e].tm>t&&(h=i[e].tm),f[h]===undefined&&(f[h]=0),f[h]+=i[e].area,s+=i[e].area;if(o=Math.max(u.documentElement.clientWidth,n.innerWidth||0)*Math.max(u.documentElement.clientHeight,n.innerHeight||0),o>0&&(o=Math.max(o-s,0)*p,f[t]===undefined&&(f[t]=0),f[t]+=o,s+=o),s){for(l in f)f.hasOwnProperty(l)&&r.push({tm:l,area:f[l]});for(r.sort(function(n,t){return n.tm-t.tm}),a=0,c=0;c<r.length;c++)a+=r[c].area,r[c].progress=a/s}},y=function(){var u,i,n,e;if(r.length)for(f=0,u=0,i=0,n=0;n<r.length;n++)e=r[n].tm-u,e>0&&i<1&&(f+=(1-i)*e),u=r[n].tm,i=r[n].progress;else f=t},i=[],r=[],t,f,p=.1;try{o=n.performance.timing.navigationStart;c();l();a();v();y()}catch(w){}return f}

@@ -1,0 +1,47 @@
+window.dbparams = ''; 
+window.db_tnt_cb = function db_tnt_cb(d) {
+	if(!d) return '';
+  d = d.split(":");
+	key_arr=[
+		'status',
+		'duns',
+		'companyName',
+		'industryNaics',
+		'industrySic',
+		'employeeInAllLocations',
+		'salesAnnual',
+    'employeesInAllLocationsNum'
+	];
+	try {
+		var p="",a="";
+		for (var i=0; i<key_arr.length; i++) {
+			var key = key_arr[i];
+        // key exists in JSON object
+				a="profile.dnb_"+key+"="+d[i]+"&";
+			p+=a;
+		}
+		window.dbparams = p;
+	} catch(e) {}
+  
+}//end of function
+
+if (document.cookie.indexOf('tntdb')==-1) {
+	document.cookie="tntdb=true";
+}
+
+
+//For BlueKai Audience
+window.bk_tnt_cb = function bk_tnt_cb(b) {
+	if(!b) return '';
+
+	try {
+		var g="",a="";
+				a="profile.bk_audience"+"="+b;
+			g+=a;
+
+		window.dbparams = window.dbparams +g;
+	} catch(e) {}
+  
+}//end of function
+
+//window.dbparams = p+"&"+g;

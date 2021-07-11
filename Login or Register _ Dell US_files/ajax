@@ -1,0 +1,30 @@
+var mboxCurrent = mboxFactories.get('default').get('mboxrecs',0);mboxCurrent.setOffer(new mboxOfferAjax(''));mboxCurrent.getOffer().setOnLoad(function() {try{Dell.perfmetrics.end("mboxrecs");}catch(e){}
+	window.ttMETA = ( typeof (window.ttMETA) != 'undefined') ?	
+	window.ttMETA : {
+		'mboxes':[], 
+		'profiles':{
+			'split': '9',
+			'segment' : 'dhs',
+            'premierCompany' : ''
+          //,'SDID' : ''
+			}
+	};
+	window.ttMETA['mboxes'].push({		
+		'mbox' : 'mboxrecs',
+		'campaignId' : '', 
+		'campaignName' : '',
+		'experience' : '',
+		'offer' : '',
+		'timeout' : ''
+	});
+
+	window.ttMBX = function(x) {
+		var mbxList = [];
+		for ( i = 0; i < ttMETA['mboxes'].length; i++) {
+			if (ttMETA['mboxes'][i].mbox == x.getName()) {
+				mbxList.push(ttMETA['mboxes'][i]);
+			}
+		}
+		return mbxList[x.getId()];
+	}; 
+});mboxCurrent.loaded();mboxFactories.get('default').get('mboxrecs',0).cancelTimeout();mboxFactories.get('default').get('mboxrecs',0).setOffer(new mboxOfferDefault()).show();

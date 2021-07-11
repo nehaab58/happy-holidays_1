@@ -1,0 +1,30 @@
+var AdvKillSwitch = false; //Set to true to stop all advance target mboxes
+var killSwitch = false; //Set to true to stop all standard target mboxes
+var emchost = document.location.host;
+var emcpath = document.location.href;
+//var killSwitch = false; //Set to true to stop all standard target mboxes
+
+if (emchost.indexOf("support") < 0)
+{
+  document.write('<script src="' + document.location.protocol + '//cdn.tt.omtrdc.net/cdn/target.js"></script>');
+}
+if (killSwitch != "undefined"){
+   if (
+      (killSwitch != true) &&	
+     	(emchost.indexOf("wipb") < 0
+       && emchost.indexOf("estoredev") < 0
+       && emchost.indexOf("wipa") <0   
+       && emchost.indexOf("estoredev") <0    
+       && emchost.indexOf("force") <0  
+       && emchost.indexOf("sso") <0    
+      // && emchost.indexOf("community") <0 
+       && emchost.indexOf("localhost") <0    
+       && emchost.indexOf("emcfederation") <0 
+       && emchost.indexOf("mobile") <0    
+      ) 
+   ) 
+   {
+       TNT.createGlobalMbox();
+   }
+  
+}  

@@ -1,0 +1,501 @@
+
+<!-- saved from url=(0149)https://secure.img-cdn.mediaplex.com/0/12309/universal_homepage.html?page_name=us_homepage&mpt=1059569306&url=https%3A%2F%2Fwww.dell.com%2Fen-us&ref= -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<script language="JavaScript">
+//Determine if the MCT is being called with a "?" or "#" delimiter
+    var q_mark_index = window.location.href.indexOf("?");
+    var h_mark_index = window.location.href.indexOf("#");
+    var delimiter_index = 0;
+    if (q_mark_index !== -1 && h_mark_index !== -1) {
+        //If both delimiters are present use the left most value
+        delimiter_index = q_mark_index < h_mark_index ? q_mark_index : h_mark_index;
+    } else if (q_mark_index !== -1) {
+        delimiter_index = q_mark_index;
+    } else if (h_mark_index !== -1) {
+        delimiter_index = h_mark_index;
+    }
+
+    var delimiter = "";
+    if (delimiter_index === q_mark_index) {
+        delimiter = "?";
+    } else if (delimiter_index === h_mark_index) {
+        delimiter = "#";
+    }
+var page_name = "";
+var protocol = window.location.protocol;
+var landing_page_url = "";
+var landing_page_seg = "";
+var landing_page_product = "";
+var landing_page_filename = "";
+var landing_page_domain = "";
+
+// Get query string following the question mark
+var qs = location.href.substring(location.href.indexOf(delimiter) + 1);
+var e_querystring = escape(qs);
+
+// Split parameters into an array of name=value pairs, assuming pairs are separated by ampersands
+var params = qs.split("&");
+
+// looking for page_name parameter value
+for (i = 0; i < params.length; i++) {
+    pos = params[i].indexOf("=");
+    if (pos == -1) {
+        continue;
+    }
+    if (params[i].substring(0, pos) == "page_name") {
+        page_name = (params[i].substring(pos + 1)).toLowerCase();
+        break;
+    }
+}
+
+//**********************
+//START NEW AJAX INCLUDE
+//**********************
+var MPLX = window.MPLX || {};
+MPLX.com = MPLX.com || {};
+MPLX.com.Ajax = MPLX.com.Ajax || {};
+(function() {
+    this.asyncScripts = new Array;
+    var pixels = new Array;
+    var iFrms = new Array;
+    var iFrmCnt = 1;
+    var cancelFlag = false;
+    var voOvr = (qs.search(/(!?)mpvo=(\d+)/) != -1) ? "s" + RegExp.$2 : "";
+    var mojoOvr = (qs.search(/(!?)mpvo=(\d+)/) != -1) ? RegExp.$1 : "";
+    var mojo_cookie = "";
+
+    this.load = function() {
+
+        var endTime = MPLX.com.Ajax.GetURLParamVal("mptout") || "2000";
+        if (endTime != null && Number(endTime) > 0)
+            var tOut = setTimeout(cancelReqs, Number(endTime));
+
+
+        loadPixels();
+        loadScripts();
+        loadFrames();
+    };
+
+
+    loadScripts = function() {
+
+        var scriptCurIndex = 0;
+        for (var i = 0; i < MPLX.com.Ajax.asyncScripts.length; i++) {
+            if (scriptCurIndex < MPLX.com.Ajax.asyncScripts.length && !cancelFlag) {
+                var scrEl = document.createElement("script");
+                scrEl.src = MPLX.com.Ajax.asyncScripts[i];
+                document.getElementsByTagName("head")[0].appendChild(scrEl);
+            }
+        }
+    };
+
+    this.loadIframe = function(u) {
+        //IFrame
+        //Check for Macro Substitution
+        for (i = 0; i < params.length; i++) {
+            var pos = params[i].indexOf("=");
+            if (pos == -1) {
+                continue;
+            }
+            var name = params[i].substring(0, pos);
+            var value = params[i].substring(pos + 1).toLowerCase();
+            var regex_str = "<" + name + "\\/>";
+            myregexp = new RegExp(regex_str, "gi");
+            u = u.replace(myregexp, value);
+        }
+        u = u.replace(/<[^<>&?=+*#@!%^~;\s'"]+\/>/gi, "");
+        if (u != null) {
+            var mpIFrm = document.createElement("iframe");
+            mpIFrm.id = "mediaplexIFrm" + iFrmCnt;
+            mpIFrm.style.display = "none";
+            mpIFrm.height = 1;
+            mpIFrm.width = 1;
+            mpIFrm.src = u;
+            iFrms.push(mpIFrm);
+            iFrmCnt++;
+        }
+    };
+
+    loadFrames = function() {
+        for (var i = 0; i < iFrms.length; i++) {
+            if (!cancelFlag)
+                document.body.appendChild(iFrms[i]);
+        }
+    };
+
+    loadPixels = function() {
+        for (var i = 0; i < pixels.length; i++) {
+            if (!cancelFlag) {
+                pixels[i].src = pixels[i].rel;
+                document.body.appendChild(pixels[i]);
+            }
+        }
+    };
+
+    this.loadPixel = function(url, olEvt) {
+        // Check to see if there are any macros for subsitution
+        for (i = 0; i < params.length; i++) {
+            var pos = params[i].indexOf("=");
+            if (pos == -1) {
+                continue;
+            }
+            var name = params[i].substring(0, pos);
+            var value = params[i].substring(pos + 1).toLowerCase();
+            var regex_str = "<" + name + "\\/>";
+            myregexp = new RegExp(regex_str, "gi");
+            url = url.replace(myregexp, value);
+        }
+        url = url.replace(/<[^<>&?=+*#@!%^~;\s'"]+\/>/gi, "");
+        // Load Pixel
+        var pixel = document.createElement("img");
+        pixel.width = 1;
+        pixel.height = 1;
+        pixel.border = 0;
+        if (olEvt != null) {
+            pixel.onload = function() {
+                try {
+                    olEvt()
+                } catch (e) {}
+            };
+        }
+        pixel.rel = url;
+        pixels.push(pixel);
+    };
+
+    this.loadCPixel = function(url, olEvt, id) {
+        // Check to see if there is a vendor override and build a string of tracking tags
+        if ((id == null || id == voOvr) || (mojoOvr != "!" && id == "MPLX")) {
+            // If a tracking tag exists for the override vendor add to the tracking pixels
+            MPLX.com.Ajax.loadPixel(url, olEvt);
+        } else {
+            // If no vendor override, get vendor ID from lastvendor cookie and build a string of tracking tags
+            var a_entry;
+            for (var j = 0; j < mojo_cookie.length; j++) {
+                a_entry = mojo_cookie[j].split(":");
+                if (client_id.indexOf("," + a_entry[0] + ",") >= 0) {
+                    if (id == ("s" + a_entry[1])) {
+                        MPLX.com.Ajax.loadPixel(url, olEvt);
+                    }
+                    break;
+                }
+            }
+
+            // Second Cookie Pass for NS Tag
+            var regex_str = "mojo3=[^;]*" + client2_id + ":(\\d+)";
+            myregexp = new RegExp(regex_str);
+            document.cookie.search(myregexp);
+            var ven = "s" + RegExp.$1;
+
+            // Add your amigo tracking tag if necessary
+            if (id == ven || id == "MPLX") {
+                // If a MOJO tracking tag exists add to tags string
+                MPLX.com.Ajax.loadPixel(url, olEvt);
+            }
+        }
+    };
+
+    getMojoCookie = function() {
+        var mojo_cookie_name = new Array("mojo2", "mojo3");
+        var c_temp, v_pos;
+        for (var i = 0; i < mojo_cookie_name.length; i++) {
+            var c_temp = document.cookie;
+            v_pos = c_temp.indexOf(mojo_cookie_name[i]);
+            if (v_pos >= 0) {
+                c_temp = c_temp.substring(v_pos + 6);
+                v_pos = c_temp.indexOf(";");
+                if (v_pos >= 0) c_temp = c_temp.substring(0, v_pos);
+                mojo_cookie += "/" + c_temp;
+            }
+        }
+        if (mojo_cookie.substr(0, 1) == "/") {
+            mojo_cookie = mojo_cookie.substr(1)
+        };
+        mojo_cookie = mojo_cookie.split("/");
+    };
+
+    cancelReqs = function() {
+        cancelFlag = true;
+        if (window.stop != undefined) {
+            window.stop();
+        } else if (document.execCommand != undefined) {
+            document.execCommand("Stop", false);
+        }
+    };
+
+    this.GetURLParamVal = function(paramName, url) {
+        var paramValue = null;
+        url = url == null ? document.location.href : url;
+        if (url != null && (url.indexOf(delimiter) > -1 || url.indexOf("&") > -1)) {
+            var urlParams = url.substring(url.indexOf(delimiter) + 1).split("&");
+            for (i = 0; i < urlParams.length; i++) {
+                if (urlParams[i].substring(0, urlParams[i].indexOf("=")) == paramName)
+                    paramValue = urlParams[i].substring(urlParams[i].indexOf("=") + 1);
+            }
+        }
+        return paramValue;
+    };
+
+    getMojoCookie();
+
+}).call(MPLX.com.Ajax);
+
+//********************
+//END NEW AJAX INCLUDE
+//********************
+
+function getParameters(qs) {
+    var query_string = {};
+    if (qs !== "") {
+        var vars = qs.split("&");
+        for (var i = 0, j = vars.length; i < j; i++) {
+            var pair = vars[i].split("=");
+            if (typeof pair[1] === "undefined") {
+                pair[1] = "";
+            } else if (pair.length > 2) {
+                for (var k = 2, l = pair.length; k < l; k++) {
+                    pair[1] += "=" + pair[k];
+                }
+            }
+            if (pair[1].indexOf("#") !== -1) {
+                var hash_pair = pair[1].split("#");
+                pair[1] = hash_pair[0];
+            }
+            if (typeof query_string[pair[0]] === "undefined") {
+                // If first entry with this name
+                query_string[pair[0]] = pair[1];
+            }
+            /*else if (typeof query_string[pair[0]] === "string") {
+        // If second entry with this name
+        var arr = [query_string[pair[0]], pair[1]];
+        query_string[pair[0]] = arr;
+      } else {
+        // If third or later entry with this name
+        query_string[pair[0]].push(pair[1]);
+      }*/
+
+        }
+    }
+    return query_string;
+}
+
+function createCookie(name, value, days, path, domain) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else {
+        var expires = "";
+    }
+
+    if (!path) {
+        path = "";
+    }
+
+    if (!domain) {
+        domain = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/" + path + "; domain=" + domain;
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0, j = ca.length; i < j; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length, c.length);
+        }
+    }
+    return null;
+}
+
+var mplxTracking = function(secondpass) {
+    var client_id = 25799;
+    var ns_client_id = 12309;
+    var dr_placement = "25799-187287-3840-0";
+    var rf_placement = "25799-187288-3840-0";
+    var ns_placement = "12309-79040-14746-0";
+
+
+
+    var mplx_parameters = getParameters(window.location.href.substring(window.location.href.indexOf(delimiter) + 1));
+    var landing_page_url = mplx_parameters["url"] || "";
+    var direct_referrer = mplx_parameters["ref"] || "";
+    direct_referrer = unescape(direct_referrer);
+    var trimmed_referrer = "";
+    if (direct_referrer.indexOf("?") !== -1) {
+        trimmed_referrer = direct_referrer.substring(0, direct_referrer.indexOf("?"));
+    } else {
+        trimmed_referrer = direct_referrer;
+    }
+
+    var org_orig = readCookie("org") || "";
+    //Get most recent org value
+    var org = org_orig.split("-").pop();
+    var mojo2 = readCookie("mojo2") || "";
+    var mojo3 = readCookie("mojo3") || "";
+
+    var ns_search_sites = ["bing.", "yahoo.com", "google", "msn", "live.com", "aol.com", "teoma", "hotbot.com", "altavista.com", "overture", "wisenut", "netscape", "freeserve", "web.de", "bluewin.ch", "search.ch", "toile.qc.ca", "alltheweb.com", "looksmart.com", "ask.com", "ask.co.uk", "lycos.co.uk", "lycos.com", "freenet.de", "shopping.freenet.de", "t-online.de", "shopping1.t-online.de", "webkatalog.lycos.de", "lycos.at", "lycos.de", "aol.de", "aol.co.uk", "tw.imagesearch.yahoo.com", "images.aol.fr", "lycos.fr", "lycos.ca", "advalvas.be", "au.altavista.com", "yellowpages.com.au", "yatv.com", "wps.yam.com", "dir.yam.com", ".ya.com", "wanadoo.es", "voila.fr", "virgilio.it", "terra.es", "tiscali.fr", "tiscali.it", "libero.it", "goeureka.com.au", "bigpond.com", "ww2.austronaut.at", "www.pchome.com.tw", "austronaut.at", "dir.pchome.com.tw", "ilse.nl", "aon.at", "free.fr", "www.toile.com", "news.baidu.com", "baidu.com", "seek.3721.com", "page.zhongsou.com", "cha.iask.com", "search.sina.com.cn", "www.sogou.com/dir/", "so.sohu.com", "nisearch.163.com", "psearch.163.com", "search.tom.com", "sitesearch.tom.com", "cn.websearch.yahoo.com", "go.8848.com", "sogou.com", "yisou.com", "cari.com.my", "yehey.com", "startpagina.nl", ".pagina.nl", "vinden.nl", "lycos.nl", "vindex.nl", "zoeken.nl", "ixquick.com", "zoek.nl", ".naver.com", ".alexa.com", "optonline.net", "yahoo.com.jp", "orange.co.uk", "tw.search.yahoo.com"];
+
+    var paid_sites = ["lt.dell.com", "mediaplex"];
+    var internal_sites = ["dell.com", "euro.dell.com", ".alienware", "//dell.com", "dell.co.uk", "dell.fr", "dell.de", "dell.dk", "dell.at", "dell.be", "dell.se", "dell.ch", "dell.fi", "dell.ie", "dell.nl", "dell.no", "dell.es"];
+
+    var pixel_type = (direct_referrer === "" ? "dr" : "");
+    if (pixel_type === "") {
+        for (var i = 0, j = paid_sites.length; i < j; i++) {
+            if (direct_referrer.indexOf(paid_sites[i]) !== -1) {
+                pixel_type = "pa";
+                break;
+            }
+        }
+        if (pixel_type === "") {
+            for (var i = 0, j = internal_sites.length; i < j; i++) {
+                if (trimmed_referrer.indexOf(internal_sites[i]) !== -1) {
+                    pixel_type = "in";
+                    break;
+                }
+            }
+            if (pixel_type === "") {
+                for (var i = 0, j = ns_search_sites.length; i < j; i++) {
+                    if (trimmed_referrer.indexOf(ns_search_sites[i]) !== -1) {
+                        pixel_type = "ns";
+                        break;
+                    }
+                }
+                if (pixel_type === "") {
+                    pixel_type = "rf";
+                }
+            }
+        }
+    }
+
+
+
+    if (typeof(secondpass) !== "undefined") {
+        pixel_type = secondpass;
+    }
+
+    //Track poor tracking
+    if (pixel_type === "pa") {
+        (function() {
+            var lp_params = getParameters(unescape(landing_page_url).substring(unescape(landing_page_url).indexOf("?") + 1));
+            var landing_page_referrer = mplx_parameters["ref"] || "";
+            var ref_placement_id = landing_page_referrer.match(/([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)/);
+            var ref_site_id = "";
+            if (ref_placement_id !== null) {
+                ref_site_id = ref_placement_id[3];
+            }
+            var country = lp_params["c"] || "us" || "";
+            var acd = lp_params["acd"] || "";
+            var dgc = lp_params["dgc"] || "";
+            var lid = lp_params["lid"] || "";
+            var cid = lp_params["cid"] || "";
+            var err = "";
+
+            if (acd === "") {
+                err += "-acd-";
+            }
+            if (dgc === "") {
+                err += "-dgc-";
+            }
+            if (lid === "") {
+                err += "-lid-";
+            }
+            if (cid === "") {
+                err += "-cid-";
+            }
+
+            //Strip trailing and leading '-'
+            err = err.replace(/^-|-$/g, '');
+            //Replace -- with -
+            err = err.replace(/--/g, '-');
+
+            if (err !== "" && ref_site_id !== "50302") {
+                MPLX.com.Ajax.loadPixel(protocol + "//adfarm.mediaplex.com/ad/tr/11541-188344-3840-0?err=" +
+                    country + '|' + err + "|" + landing_page_url + '|' + landing_page_referrer);
+            }
+
+        }());
+    }
+
+
+    //If the tracking did not fire correctly then try again
+    if (pixel_type === "in") {
+        if (org !== "") {
+            if (org === "dr") {
+                if (mojo3.indexOf(client_id + ":3840") === -1) {
+                    pixel_type = "dr";
+                }
+            } else if (org === "pa") {
+                if (mojo2.indexOf(client_id + ":") === -1) {
+                    pixel_type = "dr";
+                }
+            } else if (org === "rf") {
+                if (mojo3.indexOf(client_id + ":3840") === -1) {
+                    pixel_type = "rf";
+                }
+            }
+            /*
+      //lt does not write to mojo3 - 2nd pass impossible
+      else if (org === "ns") {
+        if (mojo3.indexOf(ns_client_id + ":3840") === -1) {
+          pixel_type = "ns";
+        }
+      }*/
+
+        } else {
+            pixel_type = "dr";
+        }
+
+    }
+
+    if (pixel_type === "dr") {
+        var direct_pixel = "//adfarm.mediaplex.com/ad/tr/" + dr_placement + "?mc=" + landing_page_url + "";
+        MPLX.com.Ajax.loadPixel(protocol + direct_pixel);
+    } else if (pixel_type === "pa") {
+        if (mojo2.indexOf(client_id + ":") === -1 && mojo3.indexOf(client_id + ":3840") === -1) {
+            var direct_pixel = "//adfarm.mediaplex.com/ad/tr/" + dr_placement + "?mc=" + landing_page_url + "";
+            MPLX.com.Ajax.loadPixel(protocol + direct_pixel);
+            pixel_type = "dr";
+        }
+    } else if (pixel_type === "ns") {
+        var mpt = new Date();
+        var mpts = mpt.getTimezoneOffset() + mpt.getTime();
+        MPLX.com.Ajax.loadPixel(protocol + "//adfarm.mediaplex.com/ad/lt/" + ns_placement + "?mpt=" + mpts + "&mpcl=" + landing_page_url + "&mpvl=" + escape(direct_referrer));
+    } else if (pixel_type === "rf") {
+        var referrer_pixel = "//adfarm.mediaplex.com/ad/tr/" + rf_placement + "?mc=" + trimmed_referrer + "";
+        MPLX.com.Ajax.loadPixel(protocol + referrer_pixel);
+    }
+
+    if (pixel_type !== "in") {
+        org_orig += "-" + pixel_type;
+        if (org_orig.length > 100) {
+            //Truncate org length if greater than 100 char
+            org_orig = org_orig.slice(-100);
+            org_orig = org_orig.substring(org_orig.indexOf("-") + 1);
+        }
+        if (org_orig[0] === "-") {
+            org_orig = org_orig.substring(1);
+        }
+        createCookie("org", org_orig, 90, null, ".mediaplex.com");
+    }
+
+};
+
+if (page_name == "us_homepage") {
+    var client_id = ",12309,";
+    var client2_id = 9076;
+    MPLX.com.Ajax.loadCPixel("https://secure.adnxs.com/px?id=815855&seg=7901508&t=2", null, "s36162");
+    mplxTracking();
+
+}
+
+</script>
+</head>
+<body onload="MPLX.com.Ajax.load()">
+
+
+<img width="1" height="1" border="0" src="./25799-187287-3840-0"></body></html>

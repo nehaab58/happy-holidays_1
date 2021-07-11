@@ -1,0 +1,22 @@
+_satellite.pushBlockingScript(function(event, target, $variables){
+  try {
+//  console.log("...........Blue Kai", bk_results);
+  if (bk_results && bk_results.campaigns) {
+//  if (bk_results) {
+      var y = "";
+      for (var x = 0; x < bk_results.campaigns.length; x++) {
+       var audience = bk_results.campaigns[x].BkDmpAudienceName;
+        if (audience) {       
+          y = y + (y === "" ? "" : ",") + audience;          
+        }
+      }
+     if (y) {
+       sessionStorage.setItem("BKAudience",y);
+
+      }
+    }
+} catch (e) {
+
+} 
+  
+});

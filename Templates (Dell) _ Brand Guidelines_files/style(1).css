@@ -1,0 +1,64 @@
+/*
+ Theme Name:     Divi Child
+ Theme URI:      
+ Description:    Divi Child
+ Author:         DellTech
+ Author URI:     
+ Template:       Divi
+ Version:        1.0.0
+*/
+ 
+
+ 
+/* =Theme customization starts here
+------------------------------------------------------- */
+#footer-info{ display: none !important;}
+
+/* SEARCH BG AND TEXT COLOR */
+	.search #et-main-area > div{background-color:#202020 !important;}
+	.search h2{color:#FFFFFF !important;}
+
+/* OTW BG AND TEXT COLOR */
+	.page-id-2455 #et-main-area >div{background-color:#202020 !important;}
+	.page-id-2455 h1{color:#FFFFFF !important;}
+
+/* REMOVE POST DATE AND AUTHOR */
+	.post-meta {display: none !important;}
+
+/* NAV SUB-MENU DOWN ARROW POSITIONING*/
+	ul.sub-menu .menu-item-has-children > a:first-child:after {top:6px !important;}
+
+/* SHARED FULLWIDTH MENU STYLES */
+#top-menu li {
+	display: inline-block;
+	padding-right: 17px;
+	font-size: 17px;
+}
+
+#top-menu > li:last-child {
+	padding-right: 30px;
+}
+
+#top-menu a {
+	display: block;
+	position: relative;
+	color: rgba(0, 0, 0, 0.6);
+	text-decoration: none;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+#top-menu-nav > ul > li > a:hover,
+#et-secondary-menu > ul > li > a:hover,
+#et-info-email:hover,
+.et-social-icons a:hover {
+	opacity: 0.7;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+
+
+
+
+

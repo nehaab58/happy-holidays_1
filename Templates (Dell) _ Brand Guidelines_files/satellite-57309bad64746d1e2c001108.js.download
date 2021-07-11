@@ -1,0 +1,48 @@
+	function trackLogin() {
+
+    if(s){   
+        s.ulogin = s.getAndPersistValue(s.ulogin,'s_ulogin',0);
+				s.trackingServer = "ecn-analytics-nssl.emc.com";
+				s.trackingServerSecure = "ecn-analytics.emc.com";      
+        s.linkTrackVars = 'events,prop66,prop32,prop73,prop74,eVar24,eVar25,eVar32,eVar50,eVar51,eVar19,eVar7,list1,list2';
+        s.linkTrackEvents = s.events = "event11";
+      	s.prop74 = "D=v7";
+		    s.prop73 = "user login";
+	//Capturing valus for the OmnitureVars data mupid, etc.  Variable is set by SSO process
+	if(typeof(omnitureVars) != "undefined"){
+	
+		if(typeof(omnitureVars.tac)!= "undefined"){s.eVar50 = omnitureVars.tac;}
+		if(typeof(omnitureVars.mupId)!= "undefined"){
+			s.eVar24 = omnitureVars.mupId;
+		//	s.eVar24=s.getAndPersistValue(s.eVar24,'emc_MUP_ID_persist',90);
+		}
+	
+		if(typeof(omnitureVars.identityEntitlements)!= "undefined"){
+			var identity = omnitureVars.identityEntitlements;
+			s.eVar25 = identity;
+		}  //temp vars until get evars set 
+	
+		if(typeof(omnitureVars.programEntitlements)!= "undefined"){
+			var program = omnitureVars.programEntitlements;
+			var stringProgram = program.toString();
+			stringProgram =stringProgram.replace(/\s/g,''); 
+			s.list1=stringProgram;
+      console.log("****** Program", s.list1);
+		}
+		if(typeof(omnitureVars.credentialEntitlements)!= "undefined"){
+			var credential= omnitureVars.credentialEntitlements;  //temp vars until get evars set 
+			var stringCredential = credential.toString();
+			stringCredential = stringCredential.replace(/\s/g,'');
+			s.list2 = stringCredential;
+			//s.eVar27 = stringCredential;
+		}
+	}       
+      
+      if (!s.ulogin){
+      
+          s.tl(true, "o", "UserLogin");
+          s.ulogin = true;
+          s.ulogin = s.getAndPersistValue(s.ulogin,'s_ulogin',0);
+      }
+	  }
+  }

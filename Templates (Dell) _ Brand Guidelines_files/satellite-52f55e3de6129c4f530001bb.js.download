@@ -1,0 +1,29 @@
+//Version 2.5
+//var emcpath = document.location.pathname.toLocaleLowerCase();
+var emchost = document.location.host.toLocaleLowerCase();
+var pageCategory = "";
+//var AdvKillSwitch = false; //Set to true to stop all advance target mboxes
+//var HPKillSwitch = false;  //Kill swithc for homepage mboxes
+if(AdvKillSwitch != "undefined"){
+   if ((AdvKillSwitch != true) 
+	   &&	
+    	(emchost.indexOf("wipb") < 0
+       && emchost.indexOf("estoredev") < 0
+       && emchost.indexOf("wipa") <0   
+       && emchost.indexOf("estoredev") <0    
+       && emchost.indexOf("force") <0  
+       && emchost.indexOf("sso") <0    
+       && emchost.indexOf("localhost") <0    
+       && emchost.indexOf("emcfederation") <0 
+       && emchost.indexOf("mobile") <0    
+      ) 
+      ) {
+
+        pageCategory = getPageCategory(); 
+        
+        if (pageCategory == "")
+        	mboxCreate("emc_global_top");
+        else 
+          mboxCreate("emc_global_top", "user.categoryId=" + pageCategory);  
+      }
+}

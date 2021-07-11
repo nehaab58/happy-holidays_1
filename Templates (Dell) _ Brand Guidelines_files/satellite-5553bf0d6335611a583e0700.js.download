@@ -1,0 +1,223 @@
+
+function getPageCategory(CAtext) {
+    if (typeof(CAtext) != "undefined"){
+
+    } else {
+        var CAtext = document.location.pathname.toLocaleLowerCase();
+    }
+        var catid = "";
+  //Category Affinity solution-big-data
+        if ((CAtext.indexOf("big data") != -1)
+            || (CAtext.indexOf("isilon") != -1)
+            || (CAtext.indexOf("big-data") != -1)
+            || (CAtext.indexOf("big_data") != -1)
+            || (CAtext.indexOf("bigdata") != -1)
+            || (CAtext.indexOf("data growth") != -1)
+            || (CAtext.indexOf("data-growth") != -1)
+            || (CAtext.indexOf("greenplum") != -1)
+            || (CAtext.indexOf("data-science") != -1)
+            || (CAtext.indexOf("data_science") != -1)
+
+           ) { catid = "solution-big-data"; }
+
+//Category Affinity solution-converged-infrastructure
+        else if ((CAtext.indexOf("converged") != -1)
+            || (CAtext.indexOf("vblock") != -1)
+            || (CAtext.indexOf("vce") != -1)
+            || (CAtext.indexOf("vspex") != -1)
+            || (CAtext.indexOf("vxblock") != -1)
+            || (CAtext.indexOf("vxrail") != -1)
+            || (CAtext.indexOf("vxrack") != -1)
+            || (CAtext.indexOf("xc-series") != -1)
+            || (CAtext.indexOf("hyperconverged") != -1)
+          ) { catid = "solution-converged-infrastructure"; }
+
+//Category Affinity solution-cloud
+        else if ((CAtext.indexOf("cloud") != -1)
+            || (CAtext.indexOf("vipr") != -1)
+            || (CAtext.indexOf("virtualization") != -1)
+            || (CAtext.indexOf("virtualizing") != -1)
+            || (CAtext.indexOf("virtustream") != -1)
+            || (CAtext.indexOf("iaas") != -1)
+          ) { catid = "solution-cloud"; }
+
+  //Category Affinity solution-content-management
+        else if ((CAtext.indexOf("applicationxtender") != -1)
+           || (CAtext.indexOf("captiva") != -1)
+           || (CAtext.indexOf("content_management") != -1)
+           || (CAtext.indexOf("content-management") != -1)
+           || (CAtext.indexOf("documentum") != -1)
+           || (CAtext.indexOf("iig") != -1)
+           || (CAtext.indexOf("isis") != -1)
+           || (CAtext.indexOf("scannerdrivers") != -1)
+           || (CAtext.indexOf("sourceone") != -1)
+           || (CAtext.indexOf("centerstage") != -1)
+           || (CAtext.indexOf("content-services") != -1)
+           || (CAtext.indexOf("digital-asset") != -1)
+           || (CAtext.indexOf("infoarchive") != -1)
+           || (CAtext.indexOf("information rights") != -1)
+           || (CAtext.indexOf("information-rights") != -1)
+           || (CAtext.indexOf("wetakecontentseriously") != -1)
+           || (CAtext.indexOf("sparkblog") != -1)
+
+             ) { catid = "solution-content-management"; }
+
+  //Category Affinity solution-security
+        else if ((CAtext.indexOf("security") != -1)
+            || (CAtext.indexOf("archer") != -1)
+            || (CAtext.indexOf("authentication") != -1)
+            || (CAtext.indexOf("aveksa") != -1)
+            || (CAtext.indexOf("envision") != -1)
+            || (CAtext.indexOf("fraud") != -1)
+            || (CAtext.indexOf("grc") != -1)
+            || (CAtext.indexOf("netwitness") != -1)
+            || (CAtext.indexOf("rsa") != -1)
+            || (emchost.indexOf("rsa") != -1)   //captures RSA Blogs
+            || (CAtext.indexOf("securid") != -1)
+            || (CAtext.indexOf("silvertail") != -1)
+
+              ) { catid = "solution-security"; }
+
+
+//Category Affinity solution-data-protection
+        else if ((CAtext.indexOf("archive") != -1)
+           || (CAtext.indexOf("archiving") != -1)
+           || (CAtext.indexOf("avamar") != -1)
+           || (CAtext.indexOf("backup") != -1)
+           || (CAtext.indexOf("data_domain") != -1)
+           || (CAtext.indexOf("data-domain") != -1)
+           || (CAtext.indexOf("data domain") != -1)
+           || (CAtext.indexOf("data protection") != -1)
+           || (CAtext.indexOf("data-protection") != -1)
+           || (CAtext.indexOf("dataprotection") != -1)
+           || (CAtext.indexOf("data_protection") != -1)
+           || (CAtext.indexOf("datadomain") != -1)
+           || (CAtext.indexOf("disk_library") != -1)
+           || (CAtext.indexOf("dpa") != -1)
+           || (CAtext.indexOf("dpad") != -1)
+           || (CAtext.indexOf("legato") != -1)
+           || (CAtext.indexOf("networker") != -1)
+           || (CAtext.indexOf("networkeronline") != -1)
+           || (CAtext.indexOf("protecting") != -1)
+           || (CAtext.indexOf("protectpoint") != -1)
+           || (CAtext.indexOf("recoverpoint") != -1)
+           || (CAtext.indexOf("replication") != -1)
+           || (CAtext.indexOf("appsync") != -1)
+           || (CAtext.indexOf("centera") != -1)
+           || (CAtext.indexOf("diskxtender") != -1)
+           || (CAtext.indexOf("mozy") != -1)
+           || (CAtext.indexOf("deduplication") != -1)
+
+          ) { catid = "solution-data-protection"; }
+
+   //Category Affinity solution-infrastructure-management
+        else if ((CAtext.indexOf("advanced software") != -1)
+           || (CAtext.indexOf("data center management") != -1)
+           || (CAtext.indexOf("data-center-management") != -1)
+           || (CAtext.indexOf("it management") != -1)
+           || (CAtext.indexOf("it-management") != -1)
+           || (CAtext.indexOf("advanced-software") != -1)
+           || (CAtext.indexOf("powerpath") != -1)
+           || (CAtext.indexOf("smarts") != -1)
+           || (CAtext.indexOf("storage resource management") != -1)
+           || (CAtext.indexOf("storage-resource-management") != -1)
+           || (CAtext.indexOf("uim") != -1)
+           || (CAtext.indexOf("watch4net") != -1)
+
+           ) { catid = "solution-infrastructure-management"; }
+
+    //Category Affinity solution-services
+        else if ((CAtext.indexOf("/services/") != -1)
+           || (CAtext.indexOf("/customer-services/") != -1)
+           || (CAtext.indexOf("infocus") != -1)
+           || (CAtext.indexOf("ProDeploy") != -1)
+           || (CAtext.indexOf("ProSupport") != -1)
+           ) { catid = "solution-services"; }
+
+    //Category Affinity solution-HPE
+        else if ((CAtext.indexOf("vs-hpe") != -1)
+
+           ) { catid = "solution-hpe"; }
+
+    //Category Affinity solution-workforce Transformation
+        else if ((CAtext.indexOf("workforce-solutions") != -1)
+           || (CAtext.indexOf("XPS") != -1)
+           || (CAtext.indexOf("latitude") != -1)
+           || (CAtext.indexOf("precision") != -1)
+           || (CAtext.indexOf("optiplex") != -1)
+           || (CAtext.indexOf("inspiron") != -1)
+           || (CAtext.indexOf("chromebook") != -1)
+           || (CAtext.indexOf("Vostro") != -1)
+           || (CAtext.indexOf("Wyse") != -1)
+           || (CAtext.indexOf("monitor") != -1)
+           || (CAtext.indexOf("display") != -1)
+           || (CAtext.indexOf("keyboard") != -1)
+           || (CAtext.indexOf("mouse") != -1)
+           || (CAtext.indexOf("dock") != -1)
+           || (CAtext.indexOf("canvas") != -1)
+
+           ) { catid = "solution-workforce-transformation"; }
+
+
+    //Category Affinity solution-pc lifecycle
+        else if ((CAtext.indexOf("pc-lifecycle") != -1)
+           || (CAtext.indexOf("Client Command Suite") != -1)
+           || (CAtext.indexOf("Endpoint Security Suite Enterprise") != -1)
+           ) { catid = "solution-pc-lifecycle"; }
+
+ //Category Affinity solution-storage
+        else if ((CAtext.indexOf("storage") != -1)
+           || (CAtext.indexOf("atmos") != -1)
+           || (CAtext.indexOf("celerra") != -1)
+           || (CAtext.indexOf("clariion") != -1)
+           || (CAtext.indexOf("clarion") != -1)
+           || (CAtext.indexOf("efficiency") != -1)
+           || (CAtext.indexOf("flash") != -1)
+           || (CAtext.indexOf("ionix") != -1)
+           || (CAtext.indexOf("prosphere") != -1)
+           || (CAtext.indexOf("scaleio") != -1)
+           || (CAtext.indexOf("symmetrix") != -1)
+           || (CAtext.indexOf("vfcache") != -1)
+           || (CAtext.indexOf("vmax") != -1)
+           || (CAtext.indexOf("vnx") != -1)
+           || (CAtext.indexOf("vplex") != -1)
+           || (CAtext.indexOf("xpectmore") != -1)
+           || (CAtext.indexOf("xtrem") != -1)
+           || (CAtext.indexOf("autostart") != -1)
+           || (CAtext.indexOf("connextrix") != -1)
+           || (CAtext.indexOf("xtremio") != -1)
+           || (CAtext.indexOf("sc-series") != -1)
+           || (CAtext.indexOf("scseries") != -1)
+           || (CAtext.indexOf("Unity") != -1)
+           || (CAtext.indexOf("Isilon") != -1)
+           || (CAtext.indexOf("powermax") != -1)
+           || (CAtext.indexOf("ecs appliance") != -1)
+           || (CAtext.indexOf("ecsappliance") != -1)
+           || (CAtext.indexOf("ecs-appliance") != -1)
+           || (CAtext.indexOf("ElasticCloudStorage") != -1)
+           || (CAtext.indexOf("Elastic Cloud Storage") != -1)
+           || (CAtext.indexOf("Elastic-Cloud-Storage") != -1)
+
+          ) { catid = "solution-storage"; }
+
+//Category Affinity solution-server
+        else if ((CAtext.indexOf("/servers/") != -1)
+           || (CAtext.indexOf("server") != -1)
+           || (CAtext.indexOf("rack") != -1)
+           || (CAtext.indexOf("modular") != -1)
+           || (CAtext.indexOf("tower") != -1)
+           || (CAtext.indexOf("poweredge") != -1)
+           || (CAtext.indexOf("fx") != -1)
+          ) { catid = "solution-servers"; }
+
+     return catid;
+}
+
+
+function targetPageParams() {
+   return {
+      "entity": {
+         "categoryId": getPageCategory()
+      }
+   }
+}

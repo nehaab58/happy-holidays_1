@@ -1,0 +1,7 @@
+	function trackPropensity(propensity) {
+
+   // if(s){   
+    console.log(propensity+" : propensity"); 
+
+ //   }
+  }
